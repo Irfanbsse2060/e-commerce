@@ -2,25 +2,26 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 
-import { Product as DomainProduct } from '../../domain/models/product';
+import { Product } from '../../domain/models/product';
 import { ProductRepository } from '../../domain/repositories/productRepository.interface';
-import { ProductDocument, Product } from '../models/product.models';
+import { ProductModelDocument, ProductModel } from '../models/product.models';
 
 @Injectable()
 export class DatabaseProductRepository implements ProductRepository {
   constructor(
-    @InjectModel(Product.name) private productModel: Model<ProductDocument>,
+    @InjectModel(ProductModel.name)
+    private productModel: Model<ProductModelDocument>,
   ) {}
 
-  async findAllByProductIds(ids: string[]): Promise<DomainProduct[]> {
+  async findAllByProductIds(ids: string[]): Promise<Product[]> {
     const products = await this.productModel.find({ pid: ids }).exec();
     return this.toProduct(products);
   }
 
-  private toProduct(products: Product[]): DomainProduct[] {
+  private toProduct(products: ProductModel[]): Product[] {
     return products.map(
       (product) =>
-        new DomainProduct(
+        new Product(
           product.pid,
           product.name,
           product.unitPrice,

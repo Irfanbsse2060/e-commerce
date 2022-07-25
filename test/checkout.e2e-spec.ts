@@ -5,12 +5,12 @@ import * as request from 'supertest';
 import { Model } from 'mongoose';
 
 import products from '../src/mocks/products';
-import { ProductDocument } from '../src/infrastructure/models/product.models';
+import { ProductModelDocument } from '../src/infrastructure/models/product.models';
 import { AppModule } from '../src/app.module';
 
 describe('Checkout Controller (e2e)', () => {
   let app: INestApplication;
-  let productModel: Model<ProductDocument>;
+  let productModel: Model<ProductModelDocument>;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -19,7 +19,7 @@ describe('Checkout Controller (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     await app.init();
-    productModel = app.get(getModelToken('Product'));
+    productModel = app.get(getModelToken('ProductModel'));
     await productModel.insertMany(products);
   });
 

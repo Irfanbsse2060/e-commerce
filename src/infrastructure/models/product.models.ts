@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type ProductDocument = Product & Document;
+export type ProductModelDocument = ProductModel & Document;
 
 class Discount {
   @Prop()
@@ -11,8 +11,8 @@ class Discount {
   quantity: number;
 }
 
-@Schema()
-export class Product {
+@Schema({ collection: 'products' })
+export class ProductModel {
   @Prop({ required: true })
   pid: string;
 
@@ -26,4 +26,4 @@ export class Product {
   discount: Discount;
 }
 
-export const ProductSchema = SchemaFactory.createForClass(Product);
+export const ProductModelSchema = SchemaFactory.createForClass(ProductModel);
