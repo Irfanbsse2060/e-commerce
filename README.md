@@ -23,12 +23,18 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
+**Tools & Technologies**
+- [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Nodejs
+- Javascript/Typescript
+- Mongodb
+- docker
+- jest
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 **How did I approach the problem?**
 
-I have used the Nest js framework, under the hood it uses the express js framework. If you are java world,  Nest js is a kinda copy of Spring boot.
+I have used the Nest js framework, under the hood it uses the express js framework. If you are from java world,  Nest js is a kinda copy of Spring boot.
 
 I could use a simple controller and services-based architecture where the controller contains the endpoint and the service layer contains all of your business logic. It could work in this case as well But to show a better architecture IMO, I have tried to implement the clean architecture.
 
@@ -75,7 +81,7 @@ $ npm run start:prod
 
 ## Test
 
-For testing, I have followed testing pyramid, more unit test and lest e2e tests. 
+For testing, I have followed testing pyramid, more unit test and less e2e tests. 
 In unit testings, i have tried to covered most of the cases and in e2e we have one positive and one negative case.
 
 ```bash
