@@ -1,5 +1,5 @@
 import { ProductRepository } from '../domain/repositories/productRepository.interface';
-import { Product } from '../domain/model/product';
+import { Product } from '../domain/models/product';
 
 export class CheckoutUseCase {
   constructor(private readonly productRepository: ProductRepository) {}
@@ -25,6 +25,7 @@ export class CheckoutUseCase {
     return productsWithCheckoutQuantity;
   };
 
+  // calculate total price of checkout
   calculatePrice = (
     products: Product[],
     productIdsWithFrequency: Record<string, number>,
