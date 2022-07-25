@@ -3,7 +3,7 @@ export class Product {
   name: string;
   unitPrice: number;
   discount?: {
-    price: number,
-    quantity: number
-  }
+    price: number;
+    quantity: number;
+  };
 }
