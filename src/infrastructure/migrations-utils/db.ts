@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb';
-import { configs } from '../config/configuration';
+import { configs } from './config/configuration';
 
 const MONGO_URL = configs.mongoUrl;
 

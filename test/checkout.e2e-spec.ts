@@ -5,7 +5,7 @@ import * as request from 'supertest';
 import { Model } from 'mongoose';
 
 import products from '../src/mocks/products';
-import { ProductDocument } from '../src/infrastructure/entities/product.entity';
+import { ProductDocument } from '../src/infrastructure/models/product.models';
 import { AppModule } from '../src/app.module';
 
 describe('Checkout Controller (e2e)', () => {

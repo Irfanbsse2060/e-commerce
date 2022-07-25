@@ -1,3 +1,5 @@
+import { Product } from '../domain/model/product';
+
 export default [
   {
     pid: '001',
@@ -28,3 +30,12 @@ export default [
     unitPrice: 30,
   },
 ];
+
+export const aProduct = (pid = '001', product: Partial<Product>): Product => {
+  return {
+    pid,
+    name: 'Rolex',
+    unitPrice: 100,
+    ...product,
+  };
+};

@@ -1,44 +1,50 @@
 import { ProductRepository } from '../domain/repositories/productRepository.interface';
-
-const calculateDiscountPrice = (product, orderedQuantity) => {
-  const discountPrice =
-    Math.floor(orderedQuantity / product.discount.quantity) *
-    product.discount.price;
-  const normalPrice =
-    (orderedQuantity % product.discount.quantity) * product.unitPrice;
-  return discountPrice + normalPrice;
-};
+import { Product } from '../domain/model/product';
 
 export class CheckoutUseCase {
   constructor(private readonly productRepository: ProductRepository) {}
 
-  async execute(products: string[]): Promise<{ price: number }> {
-    let price = 0;
+  calculateDiscountPrice(product: Product, orderedQuantity: number): number {
+    const discountPrice =
+      Math.floor(orderedQuantity / product.discount.quantity) *
+      product.discount.price;
+    const normalPrice =
+      (orderedQuantity % product.discount.quantity) * product.unitPrice;
+    return discountPrice + normalPrice;
+  }
+
+  getProductIdsFrequency = (productIds: string[]): Record<string, number> => {
     const productsWithCheckoutQuantity = {};
-
-    const productsFromDb = await this.productRepository.findAllByProductIds(
-      products,
-    );
-
-    products.forEach((product) => {
+    productIds.forEach((product) => {
       productsWithCheckoutQuantity[product] = productsWithCheckoutQuantity[
         product
       ]
         ? productsWithCheckoutQuantity[product] + 1
         : 1;
     });
+    return productsWithCheckoutQuantity;
+  };
 
-    productsFromDb.forEach((product) => {
-      const orderedQuantity = productsWithCheckoutQuantity[product.pid];
-      if (!orderedQuantity) return;
-      if (!product.discount) {
-        price += orderedQuantity * product.unitPrice;
-        return;
-      }
+  calculatePrice = (
+    products: Product[],
+    productIdsWithFrequency: Record<string, number>,
+  ): number => {
+    return products.reduce((price, product) => {
+      const productFrequency = productIdsWithFrequency[product.pid];
+      // product with discount
+      if (product.discount)
+        return price + this.calculateDiscountPrice(product, productFrequency);
+      // product without discount
+      return price + productFrequency * product.unitPrice;
+    }, 0);
+  };
 
-      price += calculateDiscountPrice(product, orderedQuantity);
-    });
-
+  async execute(productIds: string[]): Promise<{ price: number }> {
+    const productIdsWithFrequency = this.getProductIdsFrequency(productIds);
+    const products = await this.productRepository.findAllByProductIds(
+      productIds,
+    );
+    const price = this.calculatePrice(products, productIdsWithFrequency);
     return { price };
   }
 }

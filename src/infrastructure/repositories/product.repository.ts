@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 
 import { Product as DomainProduct } from '../../domain/model/product';
 import { ProductRepository } from '../../domain/repositories/productRepository.interface';
-import { ProductDocument, Product } from '../entities/product.entity';
+import { ProductDocument, Product } from '../models/product.models';
 
 @Injectable()
 export class DatabaseProductRepository implements ProductRepository {
@@ -18,18 +18,14 @@ export class DatabaseProductRepository implements ProductRepository {
   }
 
   private toProduct(products: Product[]): DomainProduct[] {
-    return products.map((product) => {
-      const domainProduct: DomainProduct = new DomainProduct();
-      domainProduct.pid = product.pid;
-      domainProduct.name = product.name;
-      domainProduct.unitPrice = product.unitPrice;
-      if (product.discount) {
-        domainProduct.discount = {
-          price: product.discount.price,
-          quantity: product.discount.quantity,
-        };
-      }
-      return domainProduct;
-    });
+    return products.map(
+      (product) =>
+        new DomainProduct(
+          product.pid,
+          product.name,
+          product.unitPrice,
+          product.discount,
+        ),
+    );
   }
 }
