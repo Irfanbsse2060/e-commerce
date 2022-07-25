@@ -26,6 +26,9 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Prerequisite
+Node version v14.17.5 plus
+
 ## Installation
 
 ```bash
@@ -35,12 +38,17 @@ $ npm install
 ## Running the app
 
 ```bash
+# Before running app, make sure postgres instance is running 
+$ npm run dev:db:up
+
 # development
 $ npm run start
 
 # watch mode
 $ npm run start:dev
+```
 
+```bash
 # production mode
 $ npm run start:prod
 ```
@@ -52,22 +60,22 @@ $ npm run start:prod
 $ npm run test
 
 # e2e tests
+$ npm run test:db:up # spin up test db
 $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
 ```
+## Migration
+For adding products data into db, please run following command. Make sure database instance is running and env variables are set
+```bash
+# For applying migration 
+$ npm run migrate:up
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+# For reverting migration
+$ npm run migrate:down
+```
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- Author - [Irfan Ali](https://github.com/Irfanbsse2060)
