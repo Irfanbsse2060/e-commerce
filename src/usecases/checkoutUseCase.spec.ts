@@ -22,21 +22,36 @@ describe('CheckoutUseCase', () => {
     });
   });
 
-  it("should checkout with 0 if no product is added into cart", async () => {
+  it('should checkout with 0 if no product is added into cart', async () => {
     const checkoutProductIds = [];
     const expectedPrice = 0;
-    expect(await checkoutUseCase.execute(checkoutProductIds)).toEqual({ price: expectedPrice });
+    expect(await checkoutUseCase.execute(checkoutProductIds)).toEqual({
+      price: expectedPrice,
+    });
   });
 
-  it("should checkout with discount price if there are discounted products in the cart", async () => {
-    const checkoutProductIds = ["001", "001", "001", "002"];
+  it('should checkout with discount price if there are discounted products in the cart', async () => {
+    const checkoutProductIds = ['001', '001', '001', '002'];
     const expectedPrice = 280;
-    expect(await checkoutUseCase.execute(checkoutProductIds)).toEqual({ price: expectedPrice });
+    expect(await checkoutUseCase.execute(checkoutProductIds)).toEqual({
+      price: expectedPrice,
+    });
   });
 
-  it("should apply discount multiple times if applicable while checking out", async () => {
-    const checkoutProductIds = ["001", "001", "001", "001", "001", "001", "001", "002"];
+  it('should apply discount multiple times if applicable while checking out', async () => {
+    const checkoutProductIds = [
+      '001',
+      '001',
+      '001',
+      '001',
+      '001',
+      '001',
+      '001',
+      '002',
+    ];
     const expectedPrice = 580;
-    expect(await checkoutUseCase.execute(checkoutProductIds)).toEqual({ price: expectedPrice });
+    expect(await checkoutUseCase.execute(checkoutProductIds)).toEqual({
+      price: expectedPrice,
+    });
   });
 });
