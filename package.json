@@ -22,7 +22,9 @@
     "db:dev:up": "docker compose up dev-db -d",
     "db:dev:down": "docker compose down dev-db",
     "db:test:up": "docker compose up test-db -d",
-    "db:test:down": "docker compose down test-db"
+    "db:test:down": "docker compose down test-db",
+    "migrate:up": "migrate --migrations-dir=\"./src/migrations\" --compiler=\"ts:./src/migrations-utils/ts-compiler.js\" up",
+    "migrate:down": "migrate --migrations-dir=\"./src/migrations\" --compiler=\"ts:./src/migrations-utils/ts-compiler.js\" down"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
