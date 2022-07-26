@@ -1,6 +1,6 @@
 
 
-##Tools & Technologies
+## Tools & Technologies
 - [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 - Nodejs
 - Javascript/Typescript
@@ -9,7 +9,7 @@
 - jest
 
 
-##How did I approach the problem?
+## How did I approach the problem?
 
 I have used the Nest js framework, under the hood it uses the express js framework. If you are from java world,  Nest js is a kinda copy of Spring boot.
 
@@ -21,12 +21,12 @@ I could use a simple controller and services-based architecture where the contro
 - Independent of Database
 
 **Code structure:**
-- src folder containing all of the src code
-- Infrastructure contains all of the code related to infra/framework for example database, and controllers.
-- domain and use cases  folder contain core business logic
-- test folder contains e2e tests.
-- migration and migration.utils folder contains migration script. we have added a migration script to load data into db
-
+- [src](https://github.com/Irfanbsse2060/e-commerce/tree/main/src) folder contains most of the src code
+- [infrastructure](https://github.com/Irfanbsse2060/e-commerce/tree/main/src/infrastructure) folder contains all the code related to infra/framework for example database, and controllers.
+- [domain](https://github.com/Irfanbsse2060/e-commerce/tree/main/src/domain) and [usecases](https://github.com/Irfanbsse2060/e-commerce/tree/main/src/usecases)  folder contain core business logic
+- [test](https://github.com/Irfanbsse2060/e-commerce/tree/main/test) folder contains e2e tests.
+- [migration](https://github.com/Irfanbsse2060/e-commerce/tree/main/src/infrastructure/migrations) and [migration.utils](https://github.com/Irfanbsse2060/e-commerce/tree/main/src/infrastructure/migrations-utils) folder contains migration script. I have added a migration script to load data into db
+- [mocks](https://github.com/Irfanbsse2060/e-commerce/tree/main/src/mocks) folder contains mock data for testing and migration
 
 ## Prerequisite
 Node version v14.17.5 plus
@@ -58,8 +58,8 @@ $ npm run start:prod
 
 ## Test
 
-For testing, I have followed testing pyramid, more unit test and less e2e tests. 
-In unit testings, i have tried to covered most of the cases and in e2e we have one positive and one negative case.
+For testing, I have followed testing pyramid, more unit tests and less e2e tests. 
+In unit testings, I have tried to covered most of the cases and in e2e we have one positive and one negative case.
 
 ```bash
 # unit tests
