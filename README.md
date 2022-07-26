@@ -11,7 +11,7 @@
 
 ## How did I approach the problem?
 
-I have used the Nest js framework, under the hood it uses the express js framework. If you are from java world,  Nest js is a kinda copy of Spring boot.
+I have used the Nest js framework, under the hood it uses the express js framework. If you are from java world, Nest js is a kinda copy of Spring boot.
 
 I could use a simple controller and services-based architecture where the controller contains the endpoint and the service layer contains all of your business logic. It could work in this case as well But to show a better architecture IMO, I have tried to implement the clean architecture.
 
@@ -29,7 +29,8 @@ I could use a simple controller and services-based architecture where the contro
 - [mocks](https://github.com/Irfanbsse2060/e-commerce/tree/main/src/mocks) folder contains mock data for testing and migration
 
 ## Prerequisite
-Node version v14.17.5 plus
+- Node version v14.17.5 plus
+- Docker for running db
 
 ## Installation
 
@@ -47,12 +48,13 @@ $ npm run dev:db:up
 # development
 $ npm run start
 
-# watch mode
+# development with watch mode
 $ npm run start:dev
 ```
 
 ```bash
 # production mode
+$ npm run build
 $ npm run start:prod
 ```
 
@@ -87,6 +89,17 @@ $ npm run migrate:up
 
 # For reverting migration
 $ npm run migrate:down
+```
+
+
+## Other useful commands
+```bash
+$ npm run db:dev:up # spin up mongo dev db
+$ npm run db:dev:down # kill mongo dev db instance
+$ npm run db:test:up # spin up mongo test db
+$ npm run db:test:down # kill mongo test db instance
+
+$ npm run lint # fix the linting issue
 ```
 
 ## Stay in touch
