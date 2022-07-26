@@ -64,7 +64,7 @@ $ npm install
 Create .env file and set environment variables. Please check .env.example file for reference
 
 ```bash
-# Before running app, make sure postgres instance is running 
+# Before running app, make sure db instance is running 
 $ npm run dev:db:up
 
 # development
