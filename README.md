@@ -39,11 +39,11 @@ $ npm install
 ```
 
 ## Running the app
-Create .env file and set environment variables. Please check .env.example file for reference
+Create .env file and set environment variables. Please check .env.example file for reference. For db name, you can check [docker-compose](https://github.com/Irfanbsse2060/e-commerce/blob/main/docker-compose.yml) file as well.
 
 ```bash
 # Before running app, make sure db instance is running 
-$ npm run dev:db:up
+$ npm run db:dev:up
 
 # development
 $ npm run start
