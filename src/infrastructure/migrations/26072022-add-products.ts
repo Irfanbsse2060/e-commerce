@@ -9,6 +9,8 @@ export const up = async () => {
 
 export const down = async () => {
   const db = await getDb();
-  const deleteResult = await db.collection('products').deleteMany({pid: {$in:products.map(product => product.pid)}});
+  const deleteResult = await db
+    .collection('products')
+    .deleteMany({ pid: { $in: products.map((product) => product.pid) } });
   console.log('Removed documents =>', deleteResult);
 };

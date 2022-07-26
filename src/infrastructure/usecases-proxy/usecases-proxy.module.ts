@@ -16,7 +16,7 @@ export class UsecasesProxyModule {
           inject: [DatabaseProductRepository],
           provide: UsecasesProxyModule.CHECKOUT_USECASE_PROXY,
           useFactory: (productRepository: DatabaseProductRepository) =>
-            new CheckoutUseCase(productRepository)
+            new CheckoutUseCase(productRepository),
         },
       ],
       exports: [UsecasesProxyModule.CHECKOUT_USECASE_PROXY],

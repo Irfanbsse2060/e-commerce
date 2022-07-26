@@ -25,7 +25,7 @@ export class DatabaseProductRepository implements ProductRepository {
           product.pid,
           product.name,
           product.unitPrice,
-          product.discount
+          product.discount,
         ),
     );
   }

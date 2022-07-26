@@ -6,7 +6,7 @@ import { CheckoutUseCase } from '../../usecases/checkoutUseCase';
 export class CheckoutController {
   constructor(
     @Inject(UsecasesProxyModule.CHECKOUT_USECASE_PROXY)
-    private readonly checkoutUseCase: CheckoutUseCase
+    private readonly checkoutUseCase: CheckoutUseCase,
   ) {}
 
   @Post()
