@@ -10,7 +10,7 @@ export class CheckoutController {
   ) {}
 
   @Post()
-  checkout(@Body(ParseArrayPipe) products: string[]) {
-    return this.checkoutUseCase.execute(products);
+  checkout(@Body(ParseArrayPipe) productIds: string[]) {
+    return this.checkoutUseCase.execute(productIds);
   }
 }

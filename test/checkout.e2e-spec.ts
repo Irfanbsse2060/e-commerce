@@ -12,7 +12,7 @@ describe('Checkout Controller (e2e)', () => {
   let app: INestApplication;
   let productModel: Model<ProductModelDocument>;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
@@ -35,6 +35,15 @@ describe('Checkout Controller (e2e)', () => {
       .send(products);
     expect(response.status).toEqual(201);
     expect(response.body.price).toEqual(360);
+  });
+
+  it('/checkout (Post) should ignore unknown product ids', async () => {
+    const products = ['001', 'does-not-exist-id'];
+    const response = await request(app.getHttpServer())
+      .post('/checkout')
+      .send(products);
+    expect(response.status).toEqual(201);
+    expect(response.body.price).toEqual(100);
   });
 
   it('/checkout (Post) should return bad request error if products list is not being passed', async () => {

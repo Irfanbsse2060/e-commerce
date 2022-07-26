@@ -5,15 +5,17 @@ export class CheckoutUseCase {
   constructor(private readonly productRepository: ProductRepository) {
   }
 
-  calculateDiscountPrice(product: Product, orderedQuantity: number): number {
+  // calculate the discount price of a product
+  calculatePriceOfDiscountProduct(product: Product, productFrequency: number): number {
     const discountPrice =
-      Math.floor(orderedQuantity / product.discount.quantity) *
+      Math.floor(productFrequency / product.discount.quantity) *
       product.discount.price;
     const normalPrice =
-      (orderedQuantity % product.discount.quantity) * product.unitPrice;
+      (productFrequency % product.discount.quantity) * product.unitPrice;
     return discountPrice + normalPrice;
   }
 
+  // return map which contains product ids with number of occurrences
   getProductIdsFrequency = (productIds: string[]): Record<string, number> => {
     return productIds.reduce(
       (productIdsWithFrequencyMap, productId) => {
@@ -26,7 +28,7 @@ export class CheckoutUseCase {
       {});
   };
 
-  // calculate total price of checkout
+  // calculate the price to checkout
   calculatePrice = (
     products: Product[],
     productIdsWithFrequency: Record<string, number>
@@ -35,12 +37,13 @@ export class CheckoutUseCase {
       const productFrequency = productIdsWithFrequency[product.pid];
       // product with discount
       if (product.discount)
-        return price + this.calculateDiscountPrice(product, productFrequency);
+        return price + this.calculatePriceOfDiscountProduct(product, productFrequency);
       // product without discount
-      return price + productFrequency * product.unitPrice;
+      return price + (productFrequency * product.unitPrice);
     }, 0);
   };
 
+  // main func to checkout
   async execute(productIds: string[]): Promise<{ price: number }> {
     const productIdsWithFrequency = this.getProductIdsFrequency(productIds);
     const products = await this.productRepository.findAllByProductIds(
